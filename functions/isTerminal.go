@@ -1,12 +1,12 @@
-//Danny Radosevich
+//Joshua Vann
+//COSC 3750
+//2-23-26
 
-//Re-writing ls command in Go
-//check if writing to terminal
-
-package functions
+package main
 
 import "os"
 
+//Checks if outputting to a terminal or being piped/redirected
 func IsTerminal(f *os.File) bool {
 	fi, err := f.Stat()
 	if err != nil {
