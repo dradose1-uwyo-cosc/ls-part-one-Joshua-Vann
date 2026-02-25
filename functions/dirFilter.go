@@ -13,7 +13,7 @@ import (
 //1. Enable sorting
 //2. Figure out how to figure out what output is.
 //3. Brighter colors?
-//4. Fix memory exception error
+//4. Fix memory exception error. Caused by trying to read lstat data in wrong directory.
 
 func main() {
 	l := os.Args[1:]
@@ -42,7 +42,7 @@ func main() {
 		r, _ := os.ReadDir(dr)
 		fr := dirFilter(r)
 		for _, ent := range fr {
-			directoryf = append(directoryf, ent.Name())
+			directoryf = append(directoryf, dr+"/"+ent.Name())
 		}
 		w := io.Writer(os.Stdout)
 		w.Write([]byte(dr))
@@ -65,6 +65,7 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
+
 
 
 
