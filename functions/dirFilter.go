@@ -58,7 +58,7 @@ func main() {
 func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	var ret = []os.DirEntry{}
 	for _, e := range entries {
-		print(e)
+		print(e.Name())
 		if e.Name()[0] == 0x2E {
 			continue
 		}
@@ -66,6 +66,7 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
+
 
 
 
