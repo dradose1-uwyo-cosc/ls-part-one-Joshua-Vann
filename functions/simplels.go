@@ -25,8 +25,10 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 			w.Write([]byte("\n"))
 		} else {
 			fi, _ := os.Lstat(a)
-			if fi == nil {
-				print("bad lstat")
+			for i, let := range a {
+				if let == rune('/') {
+					a = a[i:]
+				}
 			}
 			if fi.Mode().IsDir() {
 				blue.ColorPrint(w, a)
