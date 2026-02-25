@@ -16,9 +16,9 @@ import (
 
 func main() {
 	l := os.Args[1:]
-	var files []string
-	var directory []string
-	var directoryf []string
+	var files = []string{}
+	var directory = []string{}
+	var directoryf = []string{}
 	color := false
 	if len(l) == 0 {
 		l = append(l, ".")
@@ -49,6 +49,7 @@ func main() {
 		w.Write([]byte("\n"))
 		SimpleLS(io.Writer(os.Stdout), directoryf, color)
 		w.Write([]byte("\n"))
+		directoryf = []string{}
 	}
 }
 
