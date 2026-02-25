@@ -36,3 +36,4 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		}
 	}
 }
+
