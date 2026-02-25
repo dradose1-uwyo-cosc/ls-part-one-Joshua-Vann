@@ -27,7 +27,7 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 			fi, _ := os.Lstat(a)
 			for i, let := range a {
 				if let == rune('/') {
-					a = a[i:]
+					a = a[i+1:]
 				}
 			}
 			if fi.Mode().IsDir() {
@@ -41,4 +41,6 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		}
 	}
 }
+
+
 
