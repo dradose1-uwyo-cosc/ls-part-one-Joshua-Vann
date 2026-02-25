@@ -11,7 +11,7 @@ import (
 )
 
 //TODO:
-//1. Enable sorting
+//1. Enable sorting, looks like it works?
 //2. Figure out how to figure out what output is.
 //3. Brighter colors?
 
@@ -21,6 +21,7 @@ func main() {
 	var directory = []string{}
 	var directoryf = []string{}
 	color := false
+	out := os.Stdout
 	if len(l) == 0 {
 		l = append(l, ".")
 	}
@@ -32,7 +33,7 @@ func main() {
 			files = append(files, a)
 		}
 	}
-	if true {
+	if IsTerminal(out) {
 		color = true
 	} else {
 		color = false
@@ -50,6 +51,7 @@ func main() {
 		for _, ent := range fr {
 			directoryf = append(directoryf, dr+"/"+ent.Name())
 		}
+		sort.Strings(directoryf)
 		w.Write([]byte(dr))
 		w.Write([]byte(":"))
 		w.Write([]byte("\n"))
@@ -72,8 +74,6 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
-
-
 
 
 
