@@ -8,5 +8,7 @@ import "io"
 
 //Prints appropriate entries in color, or colorless if regular file.
 func (c color) ColorPrint(w io.Writer, s string) {
-	return
+	w.Write(c.start)
+	w.Write([]byte(s))
+	w.Write(c.end)
 }
