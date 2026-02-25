@@ -14,7 +14,7 @@ func main() {
 	if len(l) == 0 {
 		l = append(l, ".")
 	}
-	SimpleLS(io.Writer(os.Stdout), []string{"fdjsia", "fdjsiaijo"}, false)
+	SimpleLS(io.Writer(os.Stdout), []string{"fdjsia", "fdjsiaijo"}, true)
 }
 
 // Removes any hidden files from the dir listing, note not exported
