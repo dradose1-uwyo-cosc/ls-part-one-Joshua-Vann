@@ -5,7 +5,6 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"os"
 )
@@ -24,13 +23,8 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		if !useColor {
 			w.Write([]byte(a))
 		} else {
-			fi, err := os.Lstat(a)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error with file")
-				return
-			} else {
-				print(fi)
-			}
+			fi, _ := os.Lstat(a)
+			print(fi)
 		}
 	}
 }
