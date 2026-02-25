@@ -13,6 +13,7 @@ import (
 //1. Enable sorting
 //2. Figure out how to figure out what output is.
 //3. Brighter colors?
+//4. Fix memory exception error
 
 func main() {
 	l := os.Args[1:]
@@ -57,6 +58,7 @@ func main() {
 func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	var ret = []os.DirEntry{}
 	for _, e := range entries {
+		print(e)
 		if e.Name()[0] == 0x2E {
 			continue
 		}
