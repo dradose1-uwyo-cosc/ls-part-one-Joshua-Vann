@@ -22,6 +22,7 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 	for _, a := range args {
 		if !useColor {
 			w.Write([]byte(a))
+			w.Write([]byte("\n"))
 		} else {
 			fi, _ := os.Lstat(a)
 			if fi.Mode().IsDir() {
@@ -30,7 +31,9 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 				green.ColorPrint(w, a)
 			} else {
 				w.Write([]byte(a))
+				w.Write([]byte("\n"))
 			}
 		}
 	}
 }
+
