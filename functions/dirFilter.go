@@ -4,17 +4,20 @@
 
 package main
 
-import "os"
+import (
+	"io"
+	"os"
+)
 
 func main() {
 	l := os.Args[1:]
 	if len(l) == 0 {
 		l = append(l, ".")
 	}
-
+	SimpleLS(io.Writer(os.Stdout), []string{"fdjsia", "fdjsiaijo"}, false)
 }
 
-//Removes any hidden files from the dir listing, note not exported
+// Removes any hidden files from the dir listing, note not exported
 func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	var ret = []os.DirEntry{}
 	for _, e := range entries {
