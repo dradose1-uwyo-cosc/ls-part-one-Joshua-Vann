@@ -37,19 +37,24 @@ func main() {
 	} else {
 		color = false
 	}
+	w := io.Writer(os.Stdout)
 	SimpleLS(io.Writer(os.Stdout), files, color)
-	for _, dr := range directory {
+	if len(files) != 0 {
+		w.Write([]byte("\n"))
+	}
+	for i, dr := range directory {
 		r, _ := os.ReadDir(dr)
 		fr := dirFilter(r)
 		for _, ent := range fr {
 			directoryf = append(directoryf, dr+"/"+ent.Name())
 		}
-		w := io.Writer(os.Stdout)
 		w.Write([]byte(dr))
 		w.Write([]byte(":"))
 		w.Write([]byte("\n"))
 		SimpleLS(io.Writer(os.Stdout), directoryf, color)
-		w.Write([]byte("\n"))
+		if i != len(directory)-1 {
+			w.Write([]byte("\n"))
+		}
 		directoryf = []string{}
 	}
 }
