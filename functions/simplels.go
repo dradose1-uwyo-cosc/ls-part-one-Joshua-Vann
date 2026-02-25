@@ -21,6 +21,11 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 	//def := color{start: []byte("\x1b[37m"), end: []byte("\x1b[0m")}
 	for _, a := range args {
 		if !useColor {
+			for i, let := range a {
+				if let == rune('/') {
+					a = a[i+1:]
+				}
+			}
 			w.Write([]byte(a))
 			w.Write([]byte("\n"))
 		} else {
@@ -41,6 +46,7 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		}
 	}
 }
+
 
 
 
