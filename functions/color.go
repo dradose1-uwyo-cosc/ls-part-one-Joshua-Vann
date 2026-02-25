@@ -10,5 +10,6 @@ import "io"
 func (c color) ColorPrint(w io.Writer, s string) {
 	w.Write(c.start)
 	w.Write([]byte(s))
+	w.Write([]byte("\n"))
 	w.Write(c.end)
 }
