@@ -24,6 +24,7 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 			w.Write([]byte(a))
 			w.Write([]byte("\n"))
 		} else {
+			print(a)
 			fi, _ := os.Lstat(a)
 			if fi.Mode().IsDir() {
 				blue.ColorPrint(w, a)
