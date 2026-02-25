@@ -43,7 +43,6 @@ func main() {
 		for _, ent := range fr {
 			directoryf = append(directoryf, ent.Name())
 		}
-		print(directoryf[1])
 		w := io.Writer(os.Stdout)
 		w.Write([]byte(dr))
 		w.Write([]byte(":"))
@@ -64,4 +63,6 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
+
+
 
