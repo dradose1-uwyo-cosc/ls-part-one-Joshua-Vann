@@ -9,10 +9,17 @@ import (
 	"os"
 )
 
+//TODO:
+//1. Enable sorting
+//2. Figure out how to figure out what output is.
+//3. Brighter colors?
+
 func main() {
 	l := os.Args[1:]
 	var files []string
 	var directory []string
+	var directoryf []string
+	color := false
 	if len(l) == 0 {
 		l = append(l, ".")
 	}
@@ -25,38 +32,23 @@ func main() {
 		}
 	}
 	if true {
-		var directoryf []string
-		SimpleLS(io.Writer(os.Stdout), files, true)
-		for _, dr := range directory {
-			r, _ := os.ReadDir(dr)
-			fr := dirFilter(r)
-			for _, ent := range fr {
-				directoryf = append(directoryf, ent.Name())
-			}
-			w := io.Writer(os.Stdout)
-			w.Write([]byte(dr))
-			w.Write([]byte(":"))
-			w.Write([]byte("\n"))
-			SimpleLS(io.Writer(os.Stdout), directoryf, true)
-			w.Write([]byte("\n"))
-		}
-
+		color = true
 	} else {
-		var directoryf []string
-		SimpleLS(io.Writer(os.Stdout), files, false)
-		for _, dr := range directory {
-			r, _ := os.ReadDir(dr)
-			fr := dirFilter(r)
-			for _, ent := range fr {
-				directoryf = append(directoryf, ent.Name())
-			}
-			w := io.Writer(os.Stdout)
-			w.Write([]byte(dr))
-			w.Write([]byte(":"))
-			w.Write([]byte("\n"))
-			SimpleLS(io.Writer(os.Stdout), directoryf, false)
-			w.Write([]byte("\n"))
+		color = false
+	}
+	SimpleLS(io.Writer(os.Stdout), files, color)
+	for _, dr := range directory {
+		r, _ := os.ReadDir(dr)
+		fr := dirFilter(r)
+		for _, ent := range fr {
+			directoryf = append(directoryf, ent.Name())
 		}
+		w := io.Writer(os.Stdout)
+		w.Write([]byte(dr))
+		w.Write([]byte(":"))
+		w.Write([]byte("\n"))
+		SimpleLS(io.Writer(os.Stdout), directoryf, color)
+		w.Write([]byte("\n"))
 	}
 }
 
@@ -72,3 +64,4 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
+
