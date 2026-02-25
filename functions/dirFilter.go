@@ -9,10 +9,9 @@ import "os"
 func main() {
 	l := os.Args[1:]
 	if len(l) == 0 {
-		l = append()
-	} else {
-		print("b")
+		l = append(l, ".")
 	}
+
 }
 
 //Removes any hidden files from the dir listing, note not exported
@@ -25,4 +24,5 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 		}
 		ret = append(ret, e)
 	}
+	return ret
 }
