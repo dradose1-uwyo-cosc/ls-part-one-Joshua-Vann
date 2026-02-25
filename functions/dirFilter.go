@@ -57,7 +57,6 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	var ret = []os.DirEntry{}
 	for _, e := range entries {
 		if e.Name()[0] == 0x2E {
-			print(e.Name()[0])
 			continue
 		}
 		ret = append(ret, e)
