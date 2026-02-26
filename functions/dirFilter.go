@@ -29,7 +29,7 @@ func main() {
 			}
 			return int(byte(i[k]) - byte(j[k]))
 		}
-		return a - b
+		return b - a
 	}
 	if IsTerminal(out) {
 		color = true
