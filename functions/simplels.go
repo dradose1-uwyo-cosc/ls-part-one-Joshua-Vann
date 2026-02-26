@@ -2,7 +2,7 @@
 //COSC 3750
 //2-23-26
 
-package main
+package functions
 
 import (
 	"fmt"
@@ -50,6 +50,8 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		}
 	}
 }
+
+
 
 
 
