@@ -16,9 +16,8 @@ type color struct {
 
 // A simple ls for when no flags provided
 func SimpleLS(w io.Writer, args []string, useColor bool) {
-	blue := color{start: []byte("\x1b[34m"), end: []byte("\x1b[0m")}
-	green := color{start: []byte("\x1b[32m"), end: []byte("\x1b[0m")}
-	//def := color{start: []byte("\x1b[37m"), end: []byte("\x1b[0m")}
+	blue := color{start: []byte("\x1b[94m"), end: []byte("\x1b[0m")}
+	green := color{start: []byte("\x1b[92m"), end: []byte("\x1b[0m")}
 	for _, a := range args {
 		if !useColor {
 			for i, let := range a {
@@ -46,7 +45,5 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		}
 	}
 }
-
-
 
 
