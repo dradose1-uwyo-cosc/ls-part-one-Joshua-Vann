@@ -7,11 +7,9 @@ package main
 import (
 	"io"
 	"os"
+	"path/filepath"
 	"slices"
 )
-
-//TODO:
-//1. Enable sorting, looks like it works?
 
 func main() {
 	l := os.Args[1:]
@@ -40,7 +38,7 @@ func main() {
 		r, _ := os.ReadDir(".")
 		fr := dirFilter(r)
 		for _, ent := range fr {
-			directoryf = append(directoryf, "./"+ent.Name())
+			directoryf = append(directoryf, filepath.Join(".", ent.Name()))
 		}
 		slices.SortFunc(directoryf, sort)
 		SimpleLS(io.Writer(os.Stdout), directoryf, color)
@@ -66,7 +64,7 @@ func main() {
 		r, _ := os.ReadDir(dr)
 		fr := dirFilter(r)
 		for _, ent := range fr {
-			directoryf = append(directoryf, dr+"/"+ent.Name())
+			directoryf = append(directoryf, filepath.Join(dr, ent.Name()))
 		}
 		slices.SortFunc(directoryf, sort)
 		w.Write([]byte(dr))
