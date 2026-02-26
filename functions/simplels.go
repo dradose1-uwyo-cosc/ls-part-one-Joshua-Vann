@@ -31,7 +31,7 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		} else {
 			fi, err := os.Lstat(a)
 			if err != nil {
-				fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory", a)
+				fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory\n", a)
 				continue
 			}
 			for i, let := range a {
@@ -50,8 +50,6 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		}
 	}
 }
-
-
 
 
 
