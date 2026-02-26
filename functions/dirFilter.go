@@ -7,7 +7,7 @@ package main
 import (
 	"io"
 	"os"
-	"sort"
+	"slices"
 )
 
 //TODO:
@@ -20,6 +20,17 @@ func main() {
 	var directoryf = []string{}
 	color := false
 	out := os.Stdout
+	sort := func(i, j string) int {
+		a := len(i)
+		b := len(j)
+		for k := 0; k < a && k < b; k++ {
+			if i[k] == j[k] {
+				continue
+			}
+			return int(byte(i[k]) - byte(j[k]))
+		}
+		return a - b
+	}
 	if IsTerminal(out) {
 		color = true
 	} else {
@@ -31,7 +42,7 @@ func main() {
 		for _, ent := range fr {
 			directoryf = append(directoryf, "./"+ent.Name())
 		}
-		sort.Strings(directoryf)
+		slices.SortFunc(directoryf, sort)
 		SimpleLS(io.Writer(os.Stdout), directoryf, color)
 		directoryf = []string{}
 		return
@@ -45,19 +56,19 @@ func main() {
 		}
 	}
 	w := io.Writer(os.Stdout)
-	sort.Strings(files)
+	slices.SortFunc(files, sort)
 	SimpleLS(io.Writer(os.Stdout), files, color)
 	if len(files) != 0 && len(directory) != 0 {
 		w.Write([]byte("\n"))
 	}
-	sort.Strings(directory)
+	slices.SortFunc(directory, sort)
 	for i, dr := range directory {
 		r, _ := os.ReadDir(dr)
 		fr := dirFilter(r)
 		for _, ent := range fr {
 			directoryf = append(directoryf, dr+"/"+ent.Name())
 		}
-		sort.Strings(directoryf)
+		slices.SortFunc(directoryf, sort)
 		w.Write([]byte(dr))
 		w.Write([]byte(":"))
 		w.Write([]byte("\n"))
