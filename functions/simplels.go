@@ -5,6 +5,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"os"
 )
@@ -28,7 +29,11 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 			w.Write([]byte(a))
 			w.Write([]byte("\n"))
 		} else {
-			fi, _ := os.Lstat(a)
+			fi, err := os.Lstat(a)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory", a)
+				continue
+			}
 			for i, let := range a {
 				if let == rune('/') {
 					a = a[i+1:]
@@ -45,6 +50,8 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		}
 	}
 }
+
+
 
 
 
