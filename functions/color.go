@@ -2,7 +2,7 @@
 //COSC 3750
 //2-23-26
 
-package functions
+package main
 
 import "io"
 
@@ -13,3 +13,4 @@ func (c color) ColorPrint(w io.Writer, s string) {
 	w.Write([]byte("\n"))
 	w.Write(c.end)
 }
+
