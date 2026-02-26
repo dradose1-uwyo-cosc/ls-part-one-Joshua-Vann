@@ -12,8 +12,6 @@ import (
 
 //TODO:
 //1. Enable sorting, looks like it works?
-//2. Figure out how to figure out what output is.
-//3. Brighter colors?
 
 func main() {
 	l := os.Args[1:]
@@ -41,7 +39,7 @@ func main() {
 	w := io.Writer(os.Stdout)
 	sort.Strings(files)
 	SimpleLS(io.Writer(os.Stdout), files, color)
-	if len(files) != 0 {
+	if len(files) != 0 && len(directory) != 0 {
 		w.Write([]byte("\n"))
 	}
 	sort.Strings(directory)
@@ -74,6 +72,7 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
+
 
 
 
