@@ -27,9 +27,9 @@ func main() {
 			if i[k] == j[k] {
 				continue
 			}
-			return int(byte(j[k]) - byte(i[k]))
+			return int(byte(i[k]) - byte(j[k]))
 		}
-		return b - a
+		return a - b
 	}
 	if IsTerminal(out) {
 		color = true
@@ -91,6 +91,8 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
+
+
 
 
 
