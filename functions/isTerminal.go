@@ -2,7 +2,7 @@
 //COSC 3750
 //2-23-26
 
-package main
+package functions
 
 import "os"
 
