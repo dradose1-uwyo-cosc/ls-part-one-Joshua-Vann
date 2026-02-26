@@ -21,7 +21,15 @@ func main() {
 	color := false
 	out := os.Stdout
 	if len(l) == 0 {
-		l = append(l, ".")
+		r, _ := os.ReadDir(".")
+		fr := dirFilter(r)
+		for _, ent := range fr {
+			directoryf = append(directoryf, "./"+ent.Name())
+		}
+		sort.Strings(directoryf)
+		SimpleLS(io.Writer(os.Stdout), directoryf, color)
+		directoryf = []string{}
+		return
 	}
 	for _, a := range l {
 		info, _ := os.Lstat(a)
@@ -72,7 +80,6 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
-
 
 
 
