@@ -20,6 +20,11 @@ func main() {
 	var directoryf = []string{}
 	color := false
 	out := os.Stdout
+	if IsTerminal(out) {
+		color = true
+	} else {
+		color = false
+	}
 	if len(l) == 0 {
 		r, _ := os.ReadDir(".")
 		fr := dirFilter(r)
@@ -38,11 +43,6 @@ func main() {
 		} else {
 			files = append(files, a)
 		}
-	}
-	if IsTerminal(out) {
-		color = true
-	} else {
-		color = false
 	}
 	w := io.Writer(os.Stdout)
 	sort.Strings(files)
