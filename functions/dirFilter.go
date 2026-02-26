@@ -25,7 +25,7 @@ func main() {
 	} else {
 		color = false
 	}
-	if len(l) == 0 {
+	if len(l) == 0 || (len(l) == 1 && l[0] == ".") {
 		r, _ := os.ReadDir(".")
 		fr := dirFilter(r)
 		for _, ent := range fr {
@@ -80,6 +80,7 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
+
 
 
 
