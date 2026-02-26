@@ -5,6 +5,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -35,7 +36,11 @@ func main() {
 		color = false
 	}
 	if len(l) == 0 || (len(l) == 1 && l[0] == ".") {
-		r, _ := os.ReadDir(".")
+		r, err := os.ReadDir(".")
+		//Should never happen
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory", ".")
+		}
 		fr := dirFilter(r)
 		for _, ent := range fr {
 			directoryf = append(directoryf, filepath.Join(".", ent.Name()))
@@ -46,7 +51,11 @@ func main() {
 		return
 	}
 	for _, a := range l {
-		info, _ := os.Lstat(a)
+		info, err := os.Lstat(a)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory", ".")
+			continue
+		}
 		if info.Mode().IsDir() {
 			directory = append(directory, a)
 		} else {
@@ -61,7 +70,12 @@ func main() {
 	}
 	slices.SortFunc(directory, sort)
 	for i, dr := range directory {
-		r, _ := os.ReadDir(dr)
+		//Should not happen, directories already filted for validity
+		r, err := os.ReadDir(dr)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory", ".")
+			continue
+		}
 		fr := dirFilter(r)
 		for _, ent := range fr {
 			directoryf = append(directoryf, filepath.Join(dr, ent.Name()))
@@ -89,6 +103,7 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
+
 
 
 
