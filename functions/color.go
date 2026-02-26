@@ -13,4 +13,3 @@ func (c color) ColorPrint(w io.Writer, s string) {
 	w.Write([]byte("\n"))
 	w.Write(c.end)
 }
-
