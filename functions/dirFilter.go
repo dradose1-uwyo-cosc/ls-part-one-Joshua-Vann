@@ -53,7 +53,10 @@ func main() {
 	for _, a := range l {
 		info, err := os.Lstat(a)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory", ".")
+			fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory", a)
+			if a != l[len(l)-1] {
+				fmt.Fprintf(os.Stderr, "\n")
+			}
 			continue
 		}
 		if info.Mode().IsDir() {
@@ -73,7 +76,10 @@ func main() {
 		//Should not happen, directories already filted for validity
 		r, err := os.ReadDir(dr)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory", ".")
+			fmt.Fprintf(os.Stderr, "gols: Could not access %s, no such file or directory", r)
+			if dr != directory[len(directory)-1] {
+				fmt.Fprintf(os.Stderr, "\n")
+			}
 			continue
 		}
 		fr := dirFilter(r)
@@ -103,6 +109,7 @@ func dirFilter(entries []os.DirEntry) []os.DirEntry {
 	}
 	return ret
 }
+
 
 
 
